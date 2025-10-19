@@ -1,0 +1,14 @@
+version: 2
+
+models:
+  - name: fct_sales
+    description: "Sales fact table combining orders, customers, and products"
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+      - name: order_amount
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: "order_amount > 0"
